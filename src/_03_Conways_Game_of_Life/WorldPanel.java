@@ -26,12 +26,12 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		setPreferredSize(new Dimension(w, h));
 		addMouseListener(this);
 		timer = new Timer(500, this);
-		this.cellsPerRow = cpr;
+		this.cellsPerRow = cpr;//50
 	
-		//2. Calculate the cell size.
-		cellSize = w/cpr;
+		//2. Calculate the cell size. >>>10<<<
+		cellSize = (w <= h) ? w/cpr : h/cpr;
 		//3. Initialize the cell array to the appropriate size.
-		cells = new Cell[cpr][cpr];
+		cells = new Cell[cpr][cpr];//50 by 50
 		//3. Iterate through the array and initialize each cell.
 		//   Don't forget to consider the cell's dimensions when 
 		//   passing in the location.
@@ -39,14 +39,15 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		{
 			for (int y = 0; y < cpr; y++)
 			{
-				cells[x][y] = new Cell(w*cpr,h*cpr,cpr);
+				cells[x][y] = new Cell(x, y, cellSize);
 			}
 		}
+		System.out.println("Done");
 	}
 	
 	public void randomizeCells() {
 		//4. Iterate through each cell and randomly set each
-		//   cell's isAlive memeber to true of false
+		//   cell's isAlive member to true of false
 		for (int x = 0; x < cellsPerRow;)
 		{
 			for (int y = 0; y < cellsPerRow; y++)
@@ -113,7 +114,7 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		{
 			for (int y = 0; y < cellsPerRow; y++)
 			{
-				cells[x][y].liveOrDie(n);
+				cells[x][y].liveOrDie(livingNeighbors[x][y]);
 			}
 		}
 		repaint();

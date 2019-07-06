@@ -35,7 +35,6 @@ public class ConwaysGameOfLife extends JPanel implements ActionListener{
 	public void launchGame() {
 		//build the window and start the simulation
 		//setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setLayout(new BorderLayout());
 		
 		window = new JFrame("Conway's Game Of Life");
@@ -63,11 +62,12 @@ public class ConwaysGameOfLife extends JPanel implements ActionListener{
 		add(gamePanel, BorderLayout.CENTER);
 		
 		window.pack();
-		window.setResizable(false);
+		//window.setResizable(false);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
 	}
 	boolean run = false;
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == startStopButton) {
